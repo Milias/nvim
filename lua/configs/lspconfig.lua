@@ -4,10 +4,8 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 local servers = {
-  "basedpyright",
   "bashls",
   "cssls",
-  "helm_ls",
   "html",
   "jsonls",
   "lua_ls",
@@ -31,6 +29,9 @@ for _, lsp in ipairs(servers) do
 end
 
 lspconfig.basedpyright.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
   settings = {
     pyright = {
       -- Using Ruff's import organizer
@@ -57,11 +58,16 @@ if not configs.helm_ls then
 end
 
 lspconfig.helm_ls.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
   filetypes = { "helm" },
   cmd = { "helm_ls", "serve" },
 }
 
 lspconfig.lua_ls.setup {
+  on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities,
   on_init = function(client)
     local path = client.workspace_folders[1].name
     if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -93,10 +99,18 @@ lspconfig.lua_ls.setup {
   },
 }
 
-vim.g.rustaceanvim = function()
-  return {
-    server = {
-      on_attach = nvlsp.on_attach,
+lspconfig.rust_analyzer.setup {
+  on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities,
+  on_init = nvlsp.on_init,
+  settings = {
+    ["rust-analyzer"] = {
+      checkOnSave = {
+        command = "clippy",
+      },
+      cargo = {
+        allFeatures = true,
+      },
     },
-  }
-end
+  },
+}

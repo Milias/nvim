@@ -50,6 +50,7 @@ return {
         "taplo",
         "tflint",
         "yamlfmt",
+        "rust_analyzer",
       },
       auto_update = true,
       run_on_start = true,
@@ -120,11 +121,11 @@ return {
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
 
-  {
-    "mrcjkb/rustaceanvim",
-    version = "^5",
-    ft = { "rust" },
-  },
+  -- {
+  --   "mrcjkb/rustaceanvim",
+  --   version = "^5",
+  --   ft = { "rust" },
+  -- },
 
   { "echasnovski/mini.nvim", version = false },
   { "nvim-tree/nvim-web-devicons" },
