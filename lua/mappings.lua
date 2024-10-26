@@ -1,10 +1,5 @@
 require "nvchad.mappings"
 
-local map = vim.keymap.set
-
-map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
-
 vim.keymap.set("n", "<F1>", "<Cmd>Neotree toggle<CR>")
 vim.keymap.set("n", "<F2>", "<Cmd>DiffviewOpen<CR>")
 vim.keymap.set("i", "<F1>", "<Esc>")

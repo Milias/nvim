@@ -1,5 +1,10 @@
 return {
   {
+    "windwp/nvim-autopairs",
+    enabled = false,
+  },
+
+  {
     "stevearc/conform.nvim",
     event = "BufWritePre",
     opts = require "configs.conform",
@@ -118,7 +123,6 @@ return {
   {
     "mrcjkb/rustaceanvim",
     version = "^5",
-    opts = {},
     ft = { "rust" },
   },
 
