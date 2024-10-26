@@ -119,6 +119,7 @@ return {
     "mrcjkb/rustaceanvim",
     version = "^5",
     opts = {},
+    ft = { "rust" },
   },
 
   { "echasnovski/mini.nvim", version = false },

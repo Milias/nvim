@@ -6,7 +6,7 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
 vim.keymap.set("n", "<F1>", "<Cmd>Neotree toggle<CR>")
-vim.keymap.set("n", "<F2>", "<Cmd>DiffViewOpen<CR>")
+vim.keymap.set("n", "<F2>", "<Cmd>DiffviewOpen<CR>")
 vim.keymap.set("i", "<F1>", "<Esc>")
 
 local telescope_builtin = require "telescope.builtin"

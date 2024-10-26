@@ -92,3 +92,11 @@ lspconfig.lua_ls.setup {
     Lua = {},
   },
 }
+
+vim.g.rustaceanvim = function()
+  return {
+    server = {
+      on_attach = nvlsp.on_attach,
+    },
+  }
+end
