@@ -23,10 +23,10 @@ return {
     build = ":UpdateRemotePlugins",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim", -- optional
-      "neovim/nvim-lspconfig", -- optional
+      "nvim-telescope/telescope.nvim",
+      "neovim/nvim-lspconfig",
     },
-    opts = {}, -- your configuration
+    opts = {},
   },
 
   {
@@ -60,6 +60,7 @@ return {
   },
 
   { "cappyzawa/trim.nvim", event = "BufWritePre" },
+  { "tpope/vim-fugitive", lazy = false },
 
   {
     "nvim-telescope/telescope.nvim",
@@ -71,6 +72,8 @@ return {
           "venv",
           ".venv",
           "target",
+          "__pycache__",
+          "/*.egg-info/",
         },
       },
       extensions = {
@@ -79,7 +82,6 @@ return {
           override_generic_sorter = true, -- override the generic sorter
           override_file_sorter = true, -- override the file sorter
           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-          -- the default case_mode is "smart_case"
         },
       },
     },
