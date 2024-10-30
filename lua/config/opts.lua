@@ -1,5 +1,3 @@
-require "nvchad.options"
-
 -- menuone: popup even when there is only one match
 -- noinsert: Do not insert text until a selection is made
 -- noselect: Do not select, force to select one from the menu

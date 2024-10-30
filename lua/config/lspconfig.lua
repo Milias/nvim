@@ -1,6 +1,3 @@
--- load defaults i.e lua_lsp
-require("nvchad.configs.lspconfig").defaults()
-
 local lspconfig = require "lspconfig"
 
 local servers = {
@@ -16,22 +13,14 @@ local servers = {
   "vtsls",
   "yamlls",
 }
-local nvlsp = require "nvchad.configs.lspconfig"
 local configs = require "lspconfig.configs"
 local util = require "lspconfig.util"
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
+  lspconfig[lsp].setup {}
 end
 
 lspconfig.basedpyright.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
   settings = {
     pyright = {
       -- Using Ruff's import organizer
@@ -58,16 +47,11 @@ if not configs.helm_ls then
 end
 
 lspconfig.helm_ls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
   filetypes = { "helm" },
   cmd = { "helm_ls", "serve" },
 }
 
 lspconfig.lua_ls.setup {
-  on_attach = nvlsp.on_attach,
-  capabilities = nvlsp.capabilities,
   on_init = function(client)
     local path = client.workspace_folders[1].name
     if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -100,9 +84,6 @@ lspconfig.lua_ls.setup {
 }
 
 lspconfig.rust_analyzer.setup {
-  on_attach = nvlsp.on_attach,
-  capabilities = nvlsp.capabilities,
-  on_init = nvlsp.on_init,
   settings = {
     ["rust-analyzer"] = {
       checkOnSave = {
@@ -114,3 +95,46 @@ lspconfig.rust_analyzer.setup {
     },
   },
 }
+
+vim.diagnostic.config {
+  virtual_text = false,
+  signs = true,
+  update_in_insert = true,
+  underline = true,
+  severity_sort = false,
+  float = {
+    border = "rounded",
+    source = true,
+    header = "",
+    prefix = "",
+  },
+}
+
+-- Code navigation shortcuts
+vim.keymap.set("n", "gD", vim.lsp.buf.definition)
+vim.keymap.set("n", "K", vim.lsp.buf.hover)
+vim.keymap.set("n", "gI", vim.lsp.buf.implementation)
+vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help)
+vim.keymap.set("n", "1gD", vim.lsp.buf.type_definition)
+vim.keymap.set("n", "gr", vim.lsp.buf.references)
+vim.keymap.set("n", "gR", vim.lsp.buf.rename)
+vim.keymap.set("n", "g0", vim.lsp.buf.document_symbol)
+vim.keymap.set("n", "gW", vim.lsp.buf.workspace_symbol)
+vim.keymap.set("n", "gd", vim.lsp.buf.declaration)
+vim.keymap.set("n", "ga", vim.lsp.buf.code_action)
+vim.keymap.set("n", "g[", function()
+  vim.diagnostic.jump { count = -1, float = true }
+end)
+vim.keymap.set("n", "g]", function()
+  vim.diagnostic.jump { count = 1, float = true }
+end)
+vim.keymap.set("n", "gL", function()
+  vim.diagnostic.open_float(nil, { focusable = false })
+end)
+vim.keymap.set("n", "gS", function()
+  vim.cmd [[ SymbolsOutline ]]
+end)
+
+vim.keymap.set("n", "<Leader>s", function()
+  vim.cmd [[ set invspell ]]
+end)

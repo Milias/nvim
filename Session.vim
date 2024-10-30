@@ -13,17 +13,22 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 init.lua
-badd +9 lua/chadrc.lua
-badd +25 lua/configs/lazy.lua
-badd +24 lua/configs/lspconfig.lua
-badd +27 lua/plugins/init.lua
-badd +3 lua/options.lua
-badd +22 lua/configs/conform.lua
-badd +7 lua/mappings.lua
+badd +39 lua/config/lazy.lua
+badd +52 lua/config/opts.lua
+badd +93 lua/config/lspconfig.lua
+badd +40 lua/config/conform.lua
+badd +57 lua/config/mason.lua
+badd +39 lua/plugins/lspconfig.lua
+badd +57 lua/plugins/material.lua
+badd +21 lua/plugins/fzf.lua
+badd +3 lua/mappings.lua
+badd +170 lua/config/fzf.lua
+badd +18 lua/plugins/which-key.lua
+badd +0 ./lua/config/cmp.lua
+badd +14 ./lua/plugins/cmp.lua
 argglobal
 %argdel
-edit init.lua
+edit ./lua/config/cmp.lua
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -34,19 +39,7 @@ vsplit
 wincmd _ | wincmd |
 vsplit
 3wincmd h
-wincmd _ | wincmd |
-split
-1wincmd k
 wincmd w
-wincmd w
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
-wincmd w
-wincmd _ | wincmd |
-split
-1wincmd k
 wincmd w
 wincmd w
 let &splitbelow = s:save_splitbelow
@@ -58,20 +51,12 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe '1resize ' . ((&lines * 60 + 62) / 125)
-exe 'vert 1resize ' . ((&columns * 119 + 240) / 480)
-exe '2resize ' . ((&lines * 61 + 62) / 125)
-exe 'vert 2resize ' . ((&columns * 119 + 240) / 480)
-exe '3resize ' . ((&lines * 60 + 62) / 125)
-exe 'vert 3resize ' . ((&columns * 119 + 240) / 480)
-exe '4resize ' . ((&lines * 61 + 62) / 125)
-exe 'vert 4resize ' . ((&columns * 119 + 240) / 480)
-exe '5resize ' . ((&lines * 60 + 62) / 125)
-exe 'vert 5resize ' . ((&columns * 120 + 240) / 480)
-exe '6resize ' . ((&lines * 61 + 62) / 125)
-exe 'vert 6resize ' . ((&columns * 120 + 240) / 480)
-exe 'vert 7resize ' . ((&columns * 119 + 240) / 480)
+exe 'vert 1resize ' . ((&columns * 95 + 192) / 384)
+exe 'vert 2resize ' . ((&columns * 95 + 192) / 384)
+exe 'vert 3resize ' . ((&columns * 96 + 192) / 384)
+exe 'vert 4resize ' . ((&columns * 95 + 192) / 384)
 argglobal
+balt lua/config/fzf.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -82,65 +67,19 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 35 - ((34 * winheight(0) + 30) / 60)
+let s:l = 19 - ((15 * winheight(0) + 52) / 104)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 35
-normal! 023|
-wincmd w
-argglobal
-if bufexists(fnamemodify("lua/options.lua", ":p")) | buffer lua/options.lua | else | edit lua/options.lua | endif
-if &buftype ==# 'terminal'
-  silent file lua/options.lua
-endif
-balt lua/plugins/init.lua
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 28 - ((27 * winheight(0) + 30) / 61)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 28
-normal! 024|
-wincmd w
-argglobal
-if bufexists(fnamemodify("lua/chadrc.lua", ":p")) | buffer lua/chadrc.lua | else | edit lua/chadrc.lua | endif
-if &buftype ==# 'terminal'
-  silent file lua/chadrc.lua
-endif
-balt init.lua
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 9 - ((8 * winheight(0) + 30) / 60)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 9
+keepjumps 19
 normal! 0
 wincmd w
 argglobal
-if bufexists(fnamemodify("lua/configs/conform.lua", ":p")) | buffer lua/configs/conform.lua | else | edit lua/configs/conform.lua | endif
+if bufexists(fnamemodify("lua/config/lspconfig.lua", ":p")) | buffer lua/config/lspconfig.lua | else | edit lua/config/lspconfig.lua | endif
 if &buftype ==# 'terminal'
-  silent file lua/configs/conform.lua
+  silent file lua/config/lspconfig.lua
 endif
-balt init.lua
+balt lua/config/fzf.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -151,42 +90,19 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 22 - ((21 * winheight(0) + 30) / 61)
+let s:l = 36 - ((35 * winheight(0) + 52) / 104)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 22
-normal! 029|
-wincmd w
-argglobal
-if bufexists(fnamemodify("lua/configs/lspconfig.lua", ":p")) | buffer lua/configs/lspconfig.lua | else | edit lua/configs/lspconfig.lua | endif
-if &buftype ==# 'terminal'
-  silent file lua/configs/lspconfig.lua
-endif
-balt lua/configs/lazy.lua
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 30) / 60)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 1
+keepjumps 36
 normal! 0
 wincmd w
 argglobal
-if bufexists(fnamemodify("lua/mappings.lua", ":p")) | buffer lua/mappings.lua | else | edit lua/mappings.lua | endif
+if bufexists(fnamemodify("./lua/plugins/cmp.lua", ":p")) | buffer ./lua/plugins/cmp.lua | else | edit ./lua/plugins/cmp.lua | endif
 if &buftype ==# 'terminal'
-  silent file lua/mappings.lua
+  silent file ./lua/plugins/cmp.lua
 endif
-balt lua/configs/lazy.lua
+balt lua/plugins/which-key.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -197,19 +113,19 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 7 - ((6 * winheight(0) + 30) / 61)
+let s:l = 8 - ((7 * winheight(0) + 52) / 104)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 7
-normal! 0
+keepjumps 8
+normal! 027|
 wincmd w
 argglobal
-if bufexists(fnamemodify("lua/plugins/init.lua", ":p")) | buffer lua/plugins/init.lua | else | edit lua/plugins/init.lua | endif
+if bufexists(fnamemodify("./lua/plugins/cmp.lua", ":p")) | buffer ./lua/plugins/cmp.lua | else | edit ./lua/plugins/cmp.lua | endif
 if &buftype ==# 'terminal'
-  silent file lua/plugins/init.lua
+  silent file ./lua/plugins/cmp.lua
 endif
-balt lua/configs/lspconfig.lua
+balt lua/plugins/which-key.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -220,27 +136,18 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 44 - ((43 * winheight(0) + 61) / 122)
+let s:l = 8 - ((7 * winheight(0) + 52) / 104)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 44
-normal! 017|
+keepjumps 8
+normal! 027|
 wincmd w
-5wincmd w
-exe '1resize ' . ((&lines * 60 + 62) / 125)
-exe 'vert 1resize ' . ((&columns * 119 + 240) / 480)
-exe '2resize ' . ((&lines * 61 + 62) / 125)
-exe 'vert 2resize ' . ((&columns * 119 + 240) / 480)
-exe '3resize ' . ((&lines * 60 + 62) / 125)
-exe 'vert 3resize ' . ((&columns * 119 + 240) / 480)
-exe '4resize ' . ((&lines * 61 + 62) / 125)
-exe 'vert 4resize ' . ((&columns * 119 + 240) / 480)
-exe '5resize ' . ((&lines * 60 + 62) / 125)
-exe 'vert 5resize ' . ((&columns * 120 + 240) / 480)
-exe '6resize ' . ((&lines * 61 + 62) / 125)
-exe 'vert 6resize ' . ((&columns * 120 + 240) / 480)
-exe 'vert 7resize ' . ((&columns * 119 + 240) / 480)
+3wincmd w
+exe 'vert 1resize ' . ((&columns * 95 + 192) / 384)
+exe 'vert 2resize ' . ((&columns * 95 + 192) / 384)
+exe 'vert 3resize ' . ((&columns * 96 + 192) / 384)
+exe 'vert 4resize ' . ((&columns * 95 + 192) / 384)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
