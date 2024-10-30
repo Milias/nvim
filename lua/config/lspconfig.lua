@@ -5,6 +5,7 @@ local servers = {
   "cssls",
   "html",
   "jsonls",
+  "ltex",
   "lua_ls",
   "prismals",
   "ruff_lsp",
