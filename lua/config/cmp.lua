@@ -67,12 +67,16 @@ local options = {
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
-    format = lspkind.cmp_format {
-      mode = "symbol_text",
-      maxwidth = 50,
-      ellipsis_char = "...",
-      symbol_map = { Codeium = "" },
-    },
+    format = function(entry, item)
+      item = lspkind.cmp_format {
+        mode = "symbol_text",
+        maxwidth = 50,
+        ellipsis_char = "...",
+        symbol_map = { Codeium = "" },
+      }(entry, item)
+
+      return item
+    end,
   },
   completion = {
     -- completeopt = 'menu,menuone,noinsert',
