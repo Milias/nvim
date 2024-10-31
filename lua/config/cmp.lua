@@ -54,10 +54,20 @@ local options = {
   },
   -- Installed sources:
   sources = {
-    { name = "path" }, -- file paths
-    { name = "nvim_lsp", keyword_length = 1, priority = 10 }, -- from language server
-    { name = "nvim_lsp_signature_help", priority = 5 }, -- display function signatures with current parameter emphasized
-    { name = "buffer", keyword_length = 4, priority = -10 }, -- source current buffer
+    { name = "path" },
+    { name = "nvim_lsp", keyword_length = 1, priority = 10 },
+    -- display function signatures with current parameter emphasized
+    { name = "nvim_lsp_signature_help", priority = 5 },
+    {
+      name = "buffer",
+      keyword_length = 4,
+      priority = -10,
+      option = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end,
+      },
+    },
     { name = "codeium", priority = 5 },
     { name = "snippets" },
   },
