@@ -47,6 +47,11 @@ if not configs.helm_ls then
   }
 end
 
+lspconfig.bufls.setup {
+  filetypes = { "proto" },
+  cmd = { "buf", "beta", "lsp" },
+}
+
 lspconfig.helm_ls.setup {
   filetypes = { "helm" },
   cmd = { "helm_ls", "serve" },

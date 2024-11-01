@@ -26,7 +26,7 @@ badd +170 lua/config/fzf.lua
 badd +18 lua/plugins/which-key.lua
 badd +1 ./lua/config/cmp.lua
 badd +19 ./lua/plugins/cmp.lua
-badd +0 lua/config/indent-blankline.lua
+badd +1 lua/config/indent-blankline.lua
 argglobal
 %argdel
 edit ./lua/config/cmp.lua
@@ -37,10 +37,7 @@ wincmd _ | wincmd |
 vsplit
 wincmd _ | wincmd |
 vsplit
-wincmd _ | wincmd |
-vsplit
-3wincmd h
-wincmd w
+2wincmd h
 wincmd w
 wincmd w
 let &splitbelow = s:save_splitbelow
@@ -52,10 +49,9 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 119 + 240) / 480)
-exe 'vert 2resize ' . ((&columns * 119 + 240) / 480)
-exe 'vert 3resize ' . ((&columns * 120 + 240) / 480)
-exe 'vert 4resize ' . ((&columns * 119 + 240) / 480)
+exe 'vert 1resize ' . ((&columns * 91 + 137) / 274)
+exe 'vert 2resize ' . ((&columns * 90 + 137) / 274)
+exe 'vert 3resize ' . ((&columns * 91 + 137) / 274)
 argglobal
 balt lua/config/fzf.lua
 setlocal fdm=manual
@@ -68,7 +64,7 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 19 - ((18 * winheight(0) + 61) / 123)
+let s:l = 19 - ((10 * winheight(0) + 35) / 70)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -91,7 +87,7 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 29 - ((28 * winheight(0) + 61) / 123)
+let s:l = 29 - ((16 * winheight(0) + 35) / 70)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -114,41 +110,17 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 61) / 123)
+let s:l = 1 - ((0 * winheight(0) + 35) / 70)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 1
 normal! 0
 wincmd w
-argglobal
-if bufexists(fnamemodify("./lua/plugins/cmp.lua", ":p")) | buffer ./lua/plugins/cmp.lua | else | edit ./lua/plugins/cmp.lua | endif
-if &buftype ==# 'terminal'
-  silent file ./lua/plugins/cmp.lua
-endif
-balt lua/plugins/which-key.lua
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 8 - ((7 * winheight(0) + 61) / 123)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 8
-normal! 027|
-wincmd w
 3wincmd w
-exe 'vert 1resize ' . ((&columns * 119 + 240) / 480)
-exe 'vert 2resize ' . ((&columns * 119 + 240) / 480)
-exe 'vert 3resize ' . ((&columns * 120 + 240) / 480)
-exe 'vert 4resize ' . ((&columns * 119 + 240) / 480)
+exe 'vert 1resize ' . ((&columns * 91 + 137) / 274)
+exe 'vert 2resize ' . ((&columns * 90 + 137) / 274)
+exe 'vert 3resize ' . ((&columns * 91 + 137) / 274)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
