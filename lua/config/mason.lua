@@ -24,7 +24,7 @@ mason_lspconfig.setup {
     "ltex",
     "lua_ls",
     "prismals",
-    "ruff_lsp",
+    "ruff",
     "terraformls",
     "vtsls",
     "yamlls",

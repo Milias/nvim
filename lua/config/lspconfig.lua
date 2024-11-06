@@ -8,7 +8,7 @@ local servers = {
   "ltex",
   "lua_ls",
   "prismals",
-  "ruff_lsp",
+  "ruff",
   "tailwindcss",
   "terraformls",
   "vtsls",
