@@ -2,6 +2,7 @@ local lspconfig = require "lspconfig"
 
 local servers = {
   "bashls",
+  "biome",
   "buf_ls",
   "cssls",
   "html",

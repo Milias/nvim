@@ -34,6 +34,7 @@ mason_lspconfig.setup {
 mason_tool_installer.setup {
   lazy = true,
   ensure_installed = {
+    "biome",
     "codespell",
     "goimports",
     "golines",
