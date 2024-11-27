@@ -3,4 +3,5 @@ return {
   config = function()
     require "config.treesitter"
   end,
+  lazy = false,
 }
