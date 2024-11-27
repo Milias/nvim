@@ -21,6 +21,7 @@ mason_lspconfig.setup {
     "helm_ls",
     "html",
     "jsonls",
+    "buf_ls",
     "ltex",
     "lua_ls",
     "prismals",
