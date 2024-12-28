@@ -15,7 +15,7 @@ else
 endif
 badd +39 lua/config/lazy.lua
 badd +52 lua/config/opts.lua
-badd +47 lua/config/lspconfig.lua
+badd +16 lua/config/lspconfig.lua
 badd +40 lua/config/conform.lua
 badd +57 lua/config/mason.lua
 badd +39 lua/plugins/lspconfig.lua
@@ -24,11 +24,11 @@ badd +21 lua/plugins/fzf.lua
 badd +3 lua/mappings.lua
 badd +170 lua/config/fzf.lua
 badd +18 lua/plugins/which-key.lua
-badd +49 ./lua/config/cmp.lua
+badd +1 ./lua/config/cmp.lua
 badd +19 ./lua/plugins/cmp.lua
 badd +1 lua/config/indent-blankline.lua
-badd +0 ./lua/plugins/noice.lua
-badd +6 lua/config/noice.lua
+badd +18 ./lua/plugins/noice.lua
+badd +7 lua/config/noice.lua
 argglobal
 %argdel
 edit ./lua/config/cmp.lua
@@ -51,9 +51,7 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 106 + 160) / 320)
-exe 'vert 2resize ' . ((&columns * 106 + 160) / 320)
-exe 'vert 3resize ' . ((&columns * 106 + 160) / 320)
+wincmd =
 argglobal
 balt lua/config/fzf.lua
 setlocal foldmethod=manual
@@ -66,7 +64,7 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 20 - ((19 * winheight(0) + 37) / 75)
+let s:l = 20 - ((19 * winheight(0) + 41) / 82)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -74,11 +72,11 @@ keepjumps 20
 normal! 052|
 wincmd w
 argglobal
-if bufexists(fnamemodify("lua/config/noice.lua", ":p")) | buffer lua/config/noice.lua | else | edit lua/config/noice.lua | endif
+if bufexists(fnamemodify("lua/config/lspconfig.lua", ":p")) | buffer lua/config/lspconfig.lua | else | edit lua/config/lspconfig.lua | endif
 if &buftype ==# 'terminal'
-  silent file lua/config/noice.lua
+  silent file lua/config/lspconfig.lua
 endif
-balt lua/config/lspconfig.lua
+balt lua/config/noice.lua
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -89,19 +87,19 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 7 - ((6 * winheight(0) + 37) / 75)
+let s:l = 16 - ((15 * winheight(0) + 41) / 82)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 7
+keepjumps 16
 normal! 0
 wincmd w
 argglobal
-if bufexists(fnamemodify("./lua/plugins/noice.lua", ":p")) | buffer ./lua/plugins/noice.lua | else | edit ./lua/plugins/noice.lua | endif
+if bufexists(fnamemodify("lua/config/conform.lua", ":p")) | buffer lua/config/conform.lua | else | edit lua/config/conform.lua | endif
 if &buftype ==# 'terminal'
-  silent file ./lua/plugins/noice.lua
+  silent file lua/config/conform.lua
 endif
-balt lua/config/indent-blankline.lua
+balt ./lua/plugins/noice.lua
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -112,17 +110,15 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 17 - ((16 * winheight(0) + 37) / 75)
+let s:l = 34 - ((33 * winheight(0) + 41) / 82)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 17
-normal! 028|
+keepjumps 34
+normal! 016|
 wincmd w
 2wincmd w
-exe 'vert 1resize ' . ((&columns * 106 + 160) / 320)
-exe 'vert 2resize ' . ((&columns * 106 + 160) / 320)
-exe 'vert 3resize ' . ((&columns * 106 + 160) / 320)
+wincmd =
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
