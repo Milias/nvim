@@ -9,6 +9,7 @@ local servers = {
   "jsonls",
   "ltex",
   "lua_ls",
+  -- "mdx_analyzer",
   "prismals",
   "ruff",
   "tailwindcss",
