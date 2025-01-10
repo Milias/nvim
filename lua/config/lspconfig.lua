@@ -4,7 +4,7 @@ local servers = {
   "bashls",
   "biome",
   "buf_ls",
-  "cssls",
+  -- "cssls",
   "html",
   "jsonls",
   "ltex",

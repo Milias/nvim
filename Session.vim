@@ -14,8 +14,8 @@ else
   set shortmess=aoO
 endif
 badd +39 lua/config/lazy.lua
-badd +55 lua/config/opts.lua
-badd +31 lua/config/lspconfig.lua
+badd +1 lua/config/opts.lua
+badd +61 lua/config/lspconfig.lua
 badd +28 lua/config/conform.lua
 badd +18 lua/config/mason.lua
 badd +39 lua/plugins/lspconfig.lua
@@ -30,7 +30,7 @@ badd +1 lua/config/indent-blankline.lua
 badd +18 ./lua/plugins/noice.lua
 badd +7 lua/config/noice.lua
 badd +6 lua/plugins/mdx.lua
-badd +62 ./lua/config/treesitter.lua
+badd +23 ./lua/config/treesitter.lua
 argglobal
 %argdel
 edit lua/config/opts.lua
@@ -66,19 +66,19 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 55 - ((54 * winheight(0) + 40) / 80)
+let s:l = 52 - ((51 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 55
+keepjumps 52
 normal! 0
 wincmd w
 argglobal
-if bufexists(fnamemodify("./lua/config/treesitter.lua", ":p")) | buffer ./lua/config/treesitter.lua | else | edit ./lua/config/treesitter.lua | endif
+if bufexists(fnamemodify("lua/config/lspconfig.lua", ":p")) | buffer lua/config/lspconfig.lua | else | edit lua/config/lspconfig.lua | endif
 if &buftype ==# 'terminal'
-  silent file ./lua/config/treesitter.lua
+  silent file lua/config/lspconfig.lua
 endif
-balt lua/config/lspconfig.lua
+balt ./lua/config/treesitter.lua
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -89,12 +89,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 62 - ((61 * winheight(0) + 40) / 80)
+let s:l = 61 - ((60 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 62
-normal! 0
+keepjumps 61
+normal! 061|
 wincmd w
 argglobal
 if bufexists(fnamemodify("lua/config/mason.lua", ":p")) | buffer lua/config/mason.lua | else | edit lua/config/mason.lua | endif
