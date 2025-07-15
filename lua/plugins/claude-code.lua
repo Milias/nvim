@@ -5,6 +5,6 @@ return {
     "nvim-lua/plenary.nvim", -- Required for git operations
   },
   config = function()
-    require("claude-code").setup()
+    require "config.claude-code"
   end,
 }
