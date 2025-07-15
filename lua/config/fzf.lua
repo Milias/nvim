@@ -213,3 +213,9 @@ vim.keymap.set("n", "<space>mk", "<cmd>FzfxMarks<cr>", { silent = true, noremap 
 
 -- by args
 vim.keymap.set("n", "<space>xp", "<cmd>FzfxFileExplorer<cr>", { silent = true, noremap = true, desc = "File explorer" })
+
+-- Claude Code
+
+vim.keymap.set("n", "<leader>cc", "<cmd>ClaudeCode<CR>", { desc = "Toggle Claude Code" })
+vim.keymap.set("n", "<leader>cf", "<cmd>ClaudeCodeContinue<CR>", { desc = "Resume the most recent conversation" })
+vim.keymap.set("n", "<leader>cr", "<cmd>ClaudeCodeResume<CR>", { desc = "Display an interactive conversation picker" })
