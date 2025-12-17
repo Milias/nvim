@@ -14,9 +14,10 @@ mason.setup {
 
 mason_lspconfig.setup {
   lazy = true,
-  automatic_installation = true,
+  automatic_enable = false,
   ensure_installed = {
-    "basedpyright",
+    "tailwindcss",
+    "ty",
     "bashls",
     "buf_ls",
     "helm_ls",

@@ -1,6 +1,6 @@
 return {
-  "Exafunction/codeium.nvim",
-  enabled = true,
+  "Exafunction/windsurf.nvim",
+  enabled = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "hrsh7th/nvim-cmp",

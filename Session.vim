@@ -15,16 +15,16 @@ else
 endif
 badd +41 lua/config/lazy.lua
 badd +52 lua/config/opts.lua
-badd +35 lua/config/lspconfig.lua
+badd +52 lua/config/lspconfig.lua
 badd +28 lua/config/conform.lua
 badd +46 lua/config/mason.lua
-badd +39 lua/plugins/lspconfig.lua
+badd +1 lua/plugins/lspconfig.lua
 badd +57 lua/plugins/material.lua
 badd +21 lua/plugins/fzf.lua
 badd +3 lua/mappings.lua
 badd +221 lua/config/fzf.lua
 badd +18 lua/plugins/which-key.lua
-badd +37 ./lua/config/cmp.lua
+badd +69 ./lua/config/cmp.lua
 badd +19 ./lua/plugins/cmp.lua
 badd +1 lua/config/indent-blankline.lua
 badd +18 ./lua/plugins/noice.lua
@@ -35,6 +35,8 @@ badd +1 ~/.config/nvim/Session.vim
 badd +1 ~/.config/nvim/init.lua
 badd +1 ~/.config/nvim/lua/plugins/codeium.lua
 badd +1 lua/plugins/claude-code.lua
+badd +1 lua/config/material.lua
+badd +0 man://selinux_config(5)
 argglobal
 %argdel
 edit lua/plugins/claude-code.lua
@@ -70,7 +72,7 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 4 - ((3 * winheight(0) + 61) / 122)
+let s:l = 4 - ((3 * winheight(0) + 53) / 106)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -78,11 +80,11 @@ keepjumps 4
 normal! 0
 wincmd w
 argglobal
-if bufexists(fnamemodify("lua/config/fzf.lua", ":p")) | buffer lua/config/fzf.lua | else | edit lua/config/fzf.lua | endif
+if bufexists(fnamemodify("lua/plugins/lspconfig.lua", ":p")) | buffer lua/plugins/lspconfig.lua | else | edit lua/plugins/lspconfig.lua | endif
 if &buftype ==# 'terminal'
-  silent file lua/config/fzf.lua
+  silent file lua/plugins/lspconfig.lua
 endif
-balt lua/config/lazy.lua
+balt lua/config/fzf.lua
 setlocal foldmethod=manual
 setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
 setlocal foldmarker={{{,}}}
@@ -93,37 +95,37 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 221 - ((81 * winheight(0) + 61) / 122)
+let s:l = 1 - ((0 * winheight(0) + 53) / 106)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 221
-normal! 0115|
-wincmd w
-argglobal
-if bufexists(fnamemodify("./lua/config/cmp.lua", ":p")) | buffer ./lua/config/cmp.lua | else | edit ./lua/config/cmp.lua | endif
-if &buftype ==# 'terminal'
-  silent file ./lua/config/cmp.lua
-endif
-balt lua/config/mason.lua
-setlocal foldmethod=manual
-setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
-setlocal foldmarker={{{,}}}
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldenable
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 37 - ((0 * winheight(0) + 61) / 122)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 37
+keepjumps 1
 normal! 0
 wincmd w
-2wincmd w
+argglobal
+if bufexists(fnamemodify("lua/config/lspconfig.lua", ":p")) | buffer lua/config/lspconfig.lua | else | edit lua/config/lspconfig.lua | endif
+if &buftype ==# 'terminal'
+  silent file lua/config/lspconfig.lua
+endif
+balt lua/config/material.lua
+setlocal foldmethod=manual
+setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
+setlocal foldmarker={{{,}}}
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldenable
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 52 - ((51 * winheight(0) + 53) / 106)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 52
+normal! 0
+wincmd w
+3wincmd w
 wincmd =
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
@@ -140,7 +142,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

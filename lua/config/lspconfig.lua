@@ -1,42 +1,29 @@
-local lspconfig = require "lspconfig"
+local lspconfig = vim.lsp.config
 
 local servers = {
+  "ty",
   "bashls",
   "biome",
   "buf_ls",
-  -- "cssls",
+  "gopls",
+  "helm_ls",
   "html",
   "jsonls",
   "ltex",
   "lua_ls",
-  -- "mdx_analyzer",
-  "prismals",
+  "lua_ls",
   "ruff",
-  "tailwindcss",
+  "rust_analyzer",
   "terraformls",
-  "vtsls",
   "yamlls",
+  -- "cssls",
+  -- "mdx_analyzer",
+  -- "prismals",
+  "tailwindcss",
+  -- "vtsls",
 }
 local configs = require "lspconfig.configs"
 local util = require "lspconfig.util"
-
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {}
-end
-
-lspconfig.basedpyright.setup {
-  settings = {
-    pyright = {
-      -- Using Ruff's import organizer
-      disableOrganizeImports = true,
-    },
-    python = {
-      analysis = {
-        ignore = { "*" },
-      },
-    },
-  },
-}
 
 if not configs.helm_ls then
   configs.helm_ls = {
@@ -50,12 +37,12 @@ if not configs.helm_ls then
   }
 end
 
-lspconfig.helm_ls.setup {
+lspconfig("helm_ls", {
   filetypes = { "helm" },
   cmd = { "helm_ls", "serve" },
-}
+})
 
-lspconfig.lua_ls.setup {
+lspconfig("lua_ls", {
   on_init = function(client)
     local path = client.workspace_folders[1].name
     if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -85,12 +72,13 @@ lspconfig.lua_ls.setup {
   settings = {
     Lua = {},
   },
-}
+})
 
-lspconfig.rust_analyzer.setup {
+lspconfig("rust_analyzer", {
   settings = {
     ["rust-analyzer"] = {
-      checkOnSave = {
+      checkOnSave = true,
+      check = {
         command = "clippy",
       },
       cargo = {
@@ -98,7 +86,11 @@ lspconfig.rust_analyzer.setup {
       },
     },
   },
-}
+})
+
+for _, lsp in ipairs(servers) do
+  vim.lsp.enable(lsp)
+end
 
 vim.diagnostic.config {
   virtual_text = false,
