@@ -47,7 +47,10 @@ wincmd _ | wincmd |
 vsplit
 wincmd _ | wincmd |
 vsplit
-2wincmd h
+wincmd _ | wincmd |
+vsplit
+3wincmd h
+wincmd w
 wincmd w
 wincmd w
 let &splitbelow = s:save_splitbelow

@@ -59,3 +59,14 @@ configs.setup {
     max_file_lines = nil,
   },
 }
+
+vim.treesitter.language.register("hcl", "atlas-config")
+vim.treesitter.language.register("hcl", "atlas-schema-mysql")
+vim.treesitter.language.register("hcl", "atlas-schema-postgresql")
+vim.treesitter.language.register("hcl", "atlas-schema-sqlite")
+vim.treesitter.language.register("hcl", "atlas-schema-clickhouse")
+vim.treesitter.language.register("hcl", "atlas-schema-mssql")
+vim.treesitter.language.register("hcl", "atlas-schema-redshift")
+vim.treesitter.language.register("hcl", "atlas-test")
+vim.treesitter.language.register("hcl", "atlas-plan")
+vim.treesitter.language.register("hcl", "atlas-rule")

@@ -50,3 +50,20 @@ vim.g.material_style = "oceanic"
 -- disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+vim.filetype.add {
+  filename = {
+    ["atlas.hcl"] = "atlas-config",
+  },
+  pattern = {
+    [".*/*.my.hcl"] = "atlas-schema-mysql",
+    [".*/*.pg.hcl"] = "atlas-schema-postgresql",
+    [".*/*.lt.hcl"] = "atlas-schema-sqlite",
+    [".*/*.ch.hcl"] = "atlas-schema-clickhouse",
+    [".*/*.ms.hcl"] = "atlas-schema-mssql",
+    [".*/*.rs.hcl"] = "atlas-schema-redshift",
+    [".*/*.test.hcl"] = "atlas-test",
+    [".*/*.plan.hcl"] = "atlas-plan",
+    [".*/*.rule.hcl"] = "atlas-rule",
+  },
+}

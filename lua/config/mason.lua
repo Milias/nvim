@@ -25,12 +25,12 @@ mason_lspconfig.setup {
     "jsonls",
     "ltex",
     "lua_ls",
-    -- "mdx_analyzer",
     "prismals",
     "ruff",
     "terraformls",
     "vtsls",
     "yamlls",
+    -- "mdx_analyzer",
   },
 }
 
