@@ -70,7 +70,6 @@ local options = {
     },
     -- { name = "codeium", priority = 5 },
     { name = "snippets" },
-    { name = "minuet", priority = 5 },
   },
   window = {
     completion = cmp.config.window.bordered(),

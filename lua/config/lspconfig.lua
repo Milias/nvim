@@ -11,7 +11,6 @@ local servers = {
   "jsonls",
   "ltex",
   "lua_ls",
-  "lua_ls",
   "ruff",
   "rust_analyzer",
   "terraformls",
@@ -22,21 +21,6 @@ local servers = {
   "tailwindcss",
   -- "vtsls",
 }
-local configs = require "lspconfig.configs"
-local util = require "lspconfig.util"
-
-if not configs.helm_ls then
-  configs.helm_ls = {
-    default_config = {
-      cmd = { "helm_ls", "serve" },
-      filetypes = { "helm" },
-      root_dir = function(fname)
-        return util.root_pattern "Chart.yaml"(fname)
-      end,
-    },
-  }
-end
-
 lspconfig("helm_ls", {
   filetypes = { "helm" },
   cmd = { "helm_ls", "serve" },
@@ -45,7 +29,7 @@ lspconfig("helm_ls", {
 lspconfig("lua_ls", {
   on_init = function(client)
     local path = client.workspace_folders[1].name
-    if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+    if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
       return
     end
 
